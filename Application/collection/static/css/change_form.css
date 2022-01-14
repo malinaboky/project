@@ -1,0 +1,14 @@
+.submit-row {
+    display: flex;
+    gap: 20px;
+}
+
+a.historylink {
+    display: block;
+    background: gray;
+    border-radius: 4px;
+    padding: 10px 15px;
+    height: 15px;
+    line-height: 15px;
+    color: var(--button-fg);
+}

@@ -1,0 +1,92 @@
+{% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+{% if app_list %}
+  {% for app in app_list %}
+    <div class="app-{{ app.app_label }} module{% if app.app_url in request.path %} current-app{% endif %}">
+        {% if app.name == 'Младшая группа'%}
+        <button id='bt-junior_group' class="hideshow" >
+            {% blocktranslate with name=app.name %}{{ name }}{% endblocktranslate %}
+        </button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_cogdev' %}">Скачать познавательное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_speechdev' %}">Скачать речевое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_comdev' %}">Скачать социально-коммуникативное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_physdev' %}">Скачать физическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_artdev' %}">Скачать художественно-эстетическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_psycho' %}">Скачать диагностику у психолога</a></button>
+        <button class="excel"><a class="excel" href="{% url 'export_excel_eyes' %}">Скачать диагностику зрения</a></button>
+        {% elif app.name == 'Средняя группа' %}
+         <button id='bt-middle_group' class="hideshow" >
+            {% blocktranslate with name=app.name %}{{ name }}{% endblocktranslate %}
+        </button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_cogdev' %}">Скачать познавательное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_speechdev' %}">Скачать речевое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_comdev' %}">Скачать социально-коммуникативное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_physdev' %}">Скачать физическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_artdev' %}">Скачать художественно-эстетическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_psycho' %}">Скачать диагностику у психолога</a></button>
+        <button class="excel"><a class="excel" href="{% url 'mid_export_excel_eyes' %}">Скачать диагностику зрения</a></button>
+        {% elif app.name == 'Старшая группа' %}
+         <button id='bt-senior_group' class="hideshow" >
+            {% blocktranslate with name=app.name %}{{ name }}{% endblocktranslate %}
+        </button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_cogdev' %}">Скачать познавательное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_speechdev' %}">Скачать речевое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_comdev' %}">Скачать социально-коммуникативное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_physdev' %}">Скачать физическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_artdev' %}">Скачать художественно-эстетическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_psycho' %}">Скачать диагностику у психолога</a></button>
+        <button class="excel"><a class="excel" href="{% url 'sen_export_excel_eyes' %}">Скачать диагностику зрения</a></button>
+        {% else %}
+         <button id='bt-preparatory_group' class="hideshow" >
+            {% blocktranslate with name=app.name %}{{ name }}{% endblocktranslate %}
+        </button>
+        {% if app.app_label != 'users' %}
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_cogdev' %}">Скачать познавательное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_speechdev' %}">Скачать речевое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_comdev' %}">Скачать социально-коммуникативное развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_physdev' %}">Скачать физическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_artdev' %}">Скачать художественно-эстетическое развитие</a></button>
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_psycho' %}">Скачать диагностику у психолога</a></button>
+        <button class="excel"><a class="excel" href="{% url 'pre_export_excel_eyes' %}">Скачать диагностику зрения</a></button>
+        {% endif %}
+        {% endif %}
+        <div id="app-{{ app.app_label }} module{% if app.app_url in request.path %} current-app{% endif %}">
+          <table style="width:25%" class ="{% if app.app_label != 'users' %}hide{% endif %}" id="{% if app.name == 'Младшая группа' %}junior_group{% elif app.name == 'Средняя группа' %}middle_group{% elif app.name == 'Старшая группа' %}senior_group{% else %}preparatory_group{% endif %}">
+        {% for model in app.models %}
+            {% if model.admin_url and model.name == 'Познавательное развитие' or model.name == 'Речевое развитие' or model.name == 'Социально-коммуникативное развитие' or model.name == 'Физическое развитие' or model.name == "Художественное-эстетическое развитие" %}
+            <tr>
+                <th colspan="2" >{{ model.name }}</th>
+                <th></th>
+            </tr>
+            {% elif model.name == "Уровень развития внимания и памяти" %}
+            <tr>
+                <th colspan="2">Диагностика у психолога</th>
+                <th></th>
+            </tr>
+            {% elif model.name == "Уровень развития зрительного восприятия" %}
+            <tr>
+                <th colspan="2">Диагностика зрения</th>
+                <th></th>
+            </tr>
+            {% endif %}
+          <tr>
+            <th style="height:55px" colspan="2"><a href="{{ model.admin_url }}"{% if model.admin_url in request.path %} aria-current="page"{% endif %}>{{ model.name }}</a></th>
+            {% if model.add_url %}
+              <th style="height:55px"><a href="{{ model.add_url }}" class="addlink">{% translate 'Add' %}</a></th>
+            {% else %}
+              <td></td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </table>
+            </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>{% translate 'You don’t have permission to view or edit anything.' %}</p>
+{% endif %}
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>

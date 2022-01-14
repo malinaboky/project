@@ -1,0 +1,14 @@
+#changelist {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#changelist .changelist-form-container {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.object-tools {
+    margin-top: 5px;
+}

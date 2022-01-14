@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ 'Администрирование детского сада' }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Администрирование детского сада</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
